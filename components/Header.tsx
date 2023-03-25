@@ -16,25 +16,27 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.addEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
 
   // URL Image
   const profileLogo = `https://rb.gy/g1pwyx`;
   const logo = `https://rb.gy/ulxxee`;
   return (
-    <header className={`${isScrolled && "bg-[#141414]"}`}>
+    <header className={`${isScrolled && "bg-[#141414] bg-opacity-100"} bg-opacity-0 transition-all duration-100`}>
       {/* left section */}
-      <div className="flex items-center space-x-2 md:space-x-10">
-        <Image
-          loader={() => logo}
-          src={logo}
-          alt="Logo"
-          width={100}
-          height={100}
-          className="cursor-pointer object-contain"
-        />
+      <div className=" flex items-center space-x-2 md:space-x-10">
+        <div className=" h-8 w-12 md:h-12 md:w-20 flex items-center">
+          <Image
+            loader={() => logo}
+            src={logo}
+            alt="Logo"
+            width={100}
+            height={100}
+            className="cursor-pointer object-contain"
+          />
+        </div>
 
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink">Home</li>
@@ -51,14 +53,16 @@ const Header = () => {
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         <Link href="/account">
-          <Image
-            loader={() => profileLogo}
-            src={profileLogo}
-            alt="Profile"
-            width={50}
-            height={50}
-            className="cursor-pointer object-contain rounded-md"
-          />
+          <div className="h-4 w-5 md:h-8 md:w-8 flex items-center">
+            <Image
+              loader={() => profileLogo}
+              src={profileLogo}
+              alt="Profile"
+              width={50}
+              height={50}
+              className="cursor-pointer object-contain rounded-sm"
+            />
+          </div>
         </Link>
       </div>
     </header>
